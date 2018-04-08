@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20150721 22:15:30.277" generator="Robot 2.8.7 (Python 2.7.9 on win32)">
+<suite source="C:\development\robot-scripts\explore-libraries\tests\Excel.robot" id="s1" name="Excel">
+<test id="s1-t1" name="Open and Modify Excel File">
+<kw type="kw" name="ExcelLibrary.Open Excel">
+<doc>Opens the Excel file from the path provided in the file name parameter.</doc>
+<arguments>
+<arg>${EXCEL_PATH}</arg>
+</arguments>
+<status status="PASS" endtime="20150721 22:15:30.397" starttime="20150721 22:15:30.385"></status>
+</kw>
+<kw type="kw" name="${cell_data} = ExcelLibrary.Read Cell Data By Name">
+<doc>Uses the cell name to return the data from that cell.</doc>
+<arguments>
+<arg>Sheet1</arg>
+<arg>A1</arg>
+</arguments>
+<msg timestamp="20150721 22:15:30.399" level="INFO">${cell_data} = Foo</msg>
+<status status="PASS" endtime="20150721 22:15:30.398" starttime="20150721 22:15:30.398"></status>
+</kw>
+<kw type="kw" name="${new_cell_data} = BuiltIn.Catenate">
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<arguments>
+<arg>${cell_data}</arg>
+<arg>Bar</arg>
+</arguments>
+<msg timestamp="20150721 22:15:30.400" level="INFO">${new_cell_data} = Foo Bar</msg>
+<status status="PASS" endtime="20150721 22:15:30.399" starttime="20150721 22:15:30.399"></status>
+</kw>
+<kw type="kw" name="ExcelLibrary.Put String To Cell">
+<doc>Using the sheet name the value of the indicated cell is set to be the string given in the parameter.</doc>
+<arguments>
+<arg>Sheet1</arg>
+<arg>0</arg>
+<arg>0</arg>
+<arg>${new_cell_data}</arg>
+</arguments>
+<status status="PASS" endtime="20150721 22:15:30.402" starttime="20150721 22:15:30.400"></status>
+</kw>
+<kw type="kw" name="ExcelLibrary.Save Excel">
+<doc>Saves the Excel file indicated by file name, the useTempDir can be set to true if the user needs the file saved in the temporary directory.</doc>
+<arguments>
+<arg>${EXCEL_PATH}</arg>
+</arguments>
+<msg timestamp="20150721 22:15:30.405" level="FAIL">IOError: [Errno 22] invalid mode ('w+b') or filename: u'C:\\development\\robot-scripts\\explore-libraries\\Inputs\\Excel\\demo.xls'</msg>
+<status status="FAIL" endtime="20150721 22:15:30.405" starttime="20150721 22:15:30.402"></status>
+</kw>
+<doc></doc>
+<tags>
+<tag>Excel</tag>
+</tags>
+<status status="FAIL" endtime="20150721 22:15:30.405" critical="yes" starttime="20150721 22:15:30.385">IOError: [Errno 22] invalid mode ('w+b') or filename: u'C:\\development\\robot-scripts\\explore-libraries\\Inputs\\Excel\\demo.xls'</status>
+</test>
+<doc>These are some Excel tests</doc>
+<metadata>
+</metadata>
+<status status="FAIL" endtime="20150721 22:15:30.406" starttime="20150721 22:15:30.277"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="1" pass="0">Critical Tests</stat>
+<stat fail="1" pass="0">All Tests</stat>
+</total>
+<tag>
+<stat info="" links="" doc="" combined="" pass="0" fail="1">Excel</stat>
+</tag>
+<suite>
+<stat fail="1" pass="0" id="s1" name="Excel">Excel</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
