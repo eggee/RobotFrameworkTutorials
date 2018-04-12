@@ -5,7 +5,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="Robot Framework 2.8.7 (Python 2.7.9 on win32)" name="Generator">
+<meta content="Robot Framework 3.0.2 (Python 2.7.13 on win32)" name="Generator">
 <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAAAJEBoACtnfgA5cYYAERsiAEx2lAAbKkQAcazBACZCVwAcM1cAK0ucAAMDBQAnQncASG+FABkoVQAyWmgA6f8SgvH/Ij99+GLyIinyJfn/Yi//KSLzUy9iZogpIld3/4JVVTkid7vyUjNVNVJEAGOZ6Z7pXwAABpmZkRiLAAAGiJZpmGAAAEEt3SXdxAAATC7o/u3EAAC8MRZpjasAAAY1VVVTYAAABKqqqqpAAAAADKqq4AAAAAAAv4sAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMADAADgAwAA4AcAAOAHAADgBwAAwAcAAOAHAADgDwAA8A8AAPg/AAD+fwAA">
 <style media="all" type="text/css">
 /* Generic and misc styles */
@@ -30,14 +30,14 @@ br {
 }
 a, a:link, a:visited {
     text-decoration: none;
-    color: blue;
+    color: #15c;
 }
 a > img {
-    border: 1px solid blue !important;
+    border: 1px solid #15c !important;
 }
 a:hover, a:active {
     text-decoration: underline;
-    color: purple;
+    color: #61c;
 }
 .parent-name {
     font-size: 0.7em;
@@ -77,19 +77,37 @@ h2 {
     font-size: 1.0em;
 }
 /* Status text colors -- !important allows using them in links */
-.error, .fail {
-    color: red !important;
+.fail {
+    color: #f33 !important;
     font-weight: bold;
 }
 .pass {
-    color: #009900 !important;
+    color: #393 !important;
 }
-.warn {
-    color: #FFCC00 !important;
+.label {
+    padding: 2px 5px;
+    font-size: 0.75em;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    color: black;
+    background-color: #ddd;
+    border-radius: 3px;
+}
+.label.debug, .label.trace, .label.error, .label.keyword {
+    letter-spacing: 0;
+}
+.label.error, .label.fail, .label.pass, .label.warn {
+    color: #fff !important;
     font-weight: bold;
 }
-.not-run {
-    color: #444444 !important;
+.label.error, .label.fail {
+    background-color: #d9534f;
+}
+.label.pass {
+    background-color: #5cb85c;
+}
+.label.warn {
+    background-color: #ec971f;
 }
 /* Top right header */
 #top-right-header {
@@ -105,18 +123,19 @@ h2 {
     background: black;
     color: white;
     text-decoration: none;
+    font-weight: bold;
     letter-spacing: 0.1em;
     padding: 0.3em 0;
     border-bottom-left-radius: 4px;
 }
 #report-or-log-link a:hover {
-    color: yellow;
+    color: #ddd;
 }
 #log-level-selector {
     padding: 0.3em 0;
     font-size: 0.9em;
     border-bottom-left-radius: 4px;
-    background: lightgray;
+    background: #ddd;
 }
 /* Statistics table */
 .statistics {
@@ -126,15 +145,15 @@ h2 {
     margin-bottom: 1em;
 }
 .statistics tr:hover {
-    background: #ECECF7;
+    background: #f4f4f4;
     cursor: pointer;
 }
 .statistics th, .statistics td {
-    border: 1px solid black;
+    border: 1px solid #ccc;
     padding: 0.1em 0.3em;
 }
 .statistics th {
-    background-color: #DCDCF0;
+    background-color: #ddd;
     padding: 0.2em 0.3em;
 }
 .statistics td {
@@ -170,21 +189,21 @@ th.stats-col-graph:hover {
 }
 /* Statistics graph */
 .graph, .empty-graph {
-    border: 1px solid black;
+    border: 1px solid #ccc;
     width: auto;
     height: 7px;
     padding: 0;
-    background: red;
+    background: #f33;
 }
 .empty-graph {
-    background: #E9E9E9;
+    background: #eee;
 }
 .pass-bar, .fail-bar {
     float: left;
     height: 100%;
 }
 .pass-bar {
-    background: #00F000;
+    background: #1d4;
 }
 /* Tablesorter - adapted from provided Blue Skin */
 .tablesorter-header {
@@ -194,22 +213,22 @@ th.stats-col-graph:hover {
     cursor: pointer;
 }
 .tablesorter-header:hover {
-    background-color: #B8C8E3;
+    background-color: #ccc;
 }
 .tablesorter-headerAsc {
     background-image: url(data:image/gif;base64,R0lGODlhCwAJAKEAAAAAAH9/fwAAAAAAACH5BAEAAAIALAAAAAALAAkAAAIUlBWnFr3cnIr0WQOyBmvzp13CpxQAOw==);
-    background-color: #B8C8E3 !important;
+    background-color: #ccc !important;
 }
 .tablesorter-headerDesc {
     background-image: url(data:image/gif;base64,R0lGODlhCwAJAKEAAAAAAH9/fwAAAAAAACH5BAEAAAIALAAAAAALAAkAAAIUlAWnBr3cnIr0WROyDmvzp13CpxQAOw==);
-    background-color: #B8C8E3 !important;
+    background-color: #ccc !important;
 }
 .sorter-false {
     background-image: none;
     cursor: default;
 }
 .sorter-false:hover {
-    background-color: #DCDCF0;
+    background-color: #ddd;
 }
 </style>
 <style media="all" type="text/css">
@@ -217,7 +236,7 @@ th.stats-col-graph:hover {
    Licensed under the MIT License. */
 /* Containers */
 .suite, .test, #errors {
-    border: 1px solid gray;
+    border: 1px solid #ccc;
     padding: 0.3em 0.2em;
     margin: 0.2em 0;
 }
@@ -246,13 +265,13 @@ th.stats-col-graph:hover {
 }
 .element-header:hover {
     cursor: pointer;
-    background-color: #ECECF7;
-    border-color: #BCBCD7;
+    background-color: #eee;
+    border-color: #ccc;
 }
 .element-header-toggle {
     position: absolute;
     left: 3px;
-    top: 4px;
+    top: 5px;
     background-repeat: no-repeat;
     background-position: center;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAQAAABKxSfDAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfeCR0JChSkZz20AAAAGklEQVQI12NgQAKMDKzInP8IDhOqMk4G7AAANQwBE427PYUAAAAASUVORK5CYII=);
@@ -260,7 +279,7 @@ th.stats-col-graph:hover {
     height: 10px;
     width: 10px;
     background-size: 6px 6px;
-    border: 1px solid black;
+    border: 1px solid #ccc;
     border-radius: 2px;
 }
 .closed > .element-header-toggle {
@@ -268,7 +287,7 @@ th.stats-col-graph:hover {
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik0zIDB2M2gtM3YyaDN2M2gydi0zaDN2LTJoLTN2LTNoLTJ6IiAvPgo8L3N2Zz4=), none;
 }
 .element-header:hover > .element-header-toggle {
-    background-color: yellow;
+    background-color: #ccc;
 }
 .element-header-right:hover ~ .element-header-toggle {
     background-color: transparent;
@@ -288,7 +307,7 @@ th.stats-col-graph:hover {
 }
 .elapsed {
     float: right;
-    color: #808080;
+    color: #999;
     padding-left: 1em;
 }
 .link {
@@ -313,7 +332,7 @@ th.stats-col-graph:hover {
     background-size: 8px 8px;
     background-repeat: no-repeat;
     background-position: center;
-    border: 1px solid black;
+    border: 1px solid #ccc;
     border-radius: 2px;
 }
 .link {
@@ -323,25 +342,30 @@ th.stats-col-graph:hover {
     visibility: visible;
 }
 .expand:hover, .collapse:hover, .link:hover {
-    background-color: yellow;
+    background-color: #ccc;
 }
 /* Messages and errors */
-.messages {
+.messages .time, .messages .message {
     font-family: monospace;
     font-size: 1.1em;
+}
+#errors .message {
+    font-family: monospace;
+    font-size: 1.2em;
 }
 .message-row {
     height: 20px;
 }
 .time {
-    width: 8em;
+    width: 7.5em;
 }
 .error-time {
     width: 11em;
+    font-size: 0.9em;
     white-space: nowrap;
 }
 .level {
-    width: 4.5em;
+    width: 5em;
     text-align: center;
 }
 .select-message {
@@ -359,11 +383,11 @@ th.stats-col-graph:hover {
 .message-row:hover .select-message div {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAQAAAD8fJRsAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfeCR0MOzhWKZQOAAAASUlEQVQY032PsRHAIAwDX9BkicD+W8UMEqegAQJWKZ/+3sLZJhFGQEZzNaIa4ibh66En867VNaIeoP5WppNuIGoAlOm3g5VC1AdYeQv1BZPRSgAAAABJRU5ErkJggg==);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik0wIDB2MWg4di0xaC04em0wIDJ2MWg2di0xaC02em0wIDJ2MWg4di0xaC04em0wIDJ2MWg2di0xaC02eiIgLz4KPC9zdmc+), none;
-    border: 1px solid black;
+    border: 1px solid #ccc;
     border-radius: 2px;
 }
 .select-message:hover div {
-    background-color: yellow;
+    background-color: #ccc;
     cursor: pointer;
 }
 /* Message tables - these MUST NOT be combined together because otherwise
@@ -429,7 +453,7 @@ a:link, a:visited {
 }
 .tablesorter-header {
     background-image: none;
-    background: #DCDCF0 !important;
+    background: #ddd !important;
 }
 </style>
 <style media="all" type="text/css">
@@ -437,9 +461,9 @@ a:link, a:visited {
     width: 600px;
     margin: 100px auto 0 auto;
     padding: 20px;
-    color: #2A2A2E;
-    border: 1px solid #9A9A9E;
-    background: #FAFAFF;
+    color: black;
+    border: 1px solid #ccc;
+    background: #eee;
 }
 #javascript-disabled h1 {
     width: 100%;
@@ -467,14 +491,14 @@ a:link, a:visited {
     margin-top: 0.1em;
 }
 .doc table {
-    border: 1px solid gray;
+    border: 1px solid #ccc;
     background: transparent;
     border-collapse: collapse;
     empty-cells: show;
     font-size: 0.9em;
 }
 .doc table th, .doc table td {
-    border: 1px solid gray;
+    border: 1px solid #ccc;
     background: transparent;
     padding: 0.1em 0.3em;
     height: 1.2em;
@@ -486,22 +510,22 @@ a:link, a:visited {
 .doc pre {
     font-size: 1.1em;
     letter-spacing: 0.05em;
-    background: #F4F4FF;
+    background: #f4f4f4;
 }
 .doc code {
     padding: 0 0.2em;
     letter-spacing: 0.05em;
-    background: #F4F4FF;
+    background: #eee;
 }
 .doc li {
     list-style-position: inside;
     list-style-type: square;
 }
 .doc img {
-    border: 1px solid gray;
+    border: 1px solid #ccc;
 }
 .doc hr {
-    background: gray;
+    background: #ccc;
     height: 1px;
     border: 0;
 }
@@ -808,9 +832,11 @@ window.model = (function () {
             for (var i in suites)
                 tests = tests.concat(suites[i].searchTestsInSuite(pattern, matcher));
             return tests;
-        }
+        };
         suite.searchTestsByTag = function (tag) {
             return suite.searchTests(function (test) {
+                if (tag.info == "critical" || tag.info == "non-critical")
+                    return containsTagPattern(test.tags, tag.label);
                 if (tag.combined)
                     return containsTagPattern(test.tags, tag.combined);
                 return containsTag(test.tags, tag.label);
@@ -839,6 +865,10 @@ window.model = (function () {
         var patterns;
         if (pattern.indexOf('NOT') != -1) {
             patterns = pattern.split('NOT');
+            if (!util.normalize(patterns[0]))
+                return util.all(util.map(patterns.slice(1), function (p) {
+                    return !containsTagPattern(testTags, p);
+                }));
             return containsTagPattern(testTags, patterns[0]) &&
                 util.all(util.map(patterns.slice(1), function (p) {
                     return !containsTagPattern(testTags, p);
@@ -909,8 +939,11 @@ window.model = (function () {
     }
     function Keyword(data) {
         var kw = createModelObject(data);
+        kw.libname = data.libname;
         kw.type = data.type;
         kw.arguments = data.args;
+        kw.assign = data.assign + (data.assign ? ' =' : '');
+        kw.tags = data.tags;
         kw.timeout = data.timeout;
         kw.populateMessages = createIterablePopulator('Message');
         kw.populateKeywords = createIterablePopulator('Keyword');
@@ -1168,8 +1201,16 @@ window.util = function () {
         var base = window.output ? window.output.baseMillis : 0;
         return new Date(base + millis);
     }
-    function createGeneratedAgoString(generatedMillis) {
-        generatedMillis = timestamp(generatedMillis);
+    function createGeneratedString(timestamp) {
+        var date = new Date(timestamp);
+        var dt = dateTimeFromDate(date).slice(0, 17);  // drop millis
+        var offset = date.getTimezoneOffset();
+        var sign = offset > 0 ? '-' : '+';
+        var hours = Math.floor(Math.abs(offset) / 60);
+        var mins = Math.abs(offset) % 60;
+        return dt + ' GMT' + sign + padTo(hours, 2) + ':' + padTo(mins, 2);
+    }
+    function createGeneratedAgoString(timestamp) {
         function timeString(time, shortUnit) {
             var unit = {y: 'year', d: 'day', h: 'hour', m: 'minute',
                         s: 'second'}[shortUnit];
@@ -1180,7 +1221,7 @@ window.util = function () {
             // Not a perfect algorithm but ought to be enough
             return days - Math.floor(years / 4);
         }
-        var generated = Math.round(generatedMillis / 1000);
+        var generated = Math.round(timestamp / 1000);
         var current = Math.round(new Date().getTime() / 1000);
         var elapsed = current - generated;
         var prefix = '';
@@ -1239,6 +1280,7 @@ window.util = function () {
         dateTimeFromDate: dateTimeFromDate,
         formatElapsed: formatElapsed,
         timestamp: timestamp,
+        createGeneratedString: createGeneratedString,
         createGeneratedAgoString: createGeneratedAgoString,
         parseQueryString: parseQueryString
     };
@@ -1249,7 +1291,7 @@ window.testdata = function () {
     var elementsById = {};
     var idCounter = 0;
     var _statistics = null;
-    var LEVELS = ['TRACE', 'DEBUG', 'INFO', 'WARN', 'FAIL', 'ERROR'];
+    var LEVELS = ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FAIL'];
     var STATUSES = ['FAIL', 'PASS', 'NOT_RUN'];
     var KEYWORDS = ['KEYWORD', 'SETUP', 'TEARDOWN', 'FOR', 'VAR'];
     function addElement(elem) {
@@ -1291,30 +1333,36 @@ window.testdata = function () {
             type: KEYWORDS[element[0]],
             id: 'k' + (index + 1),
             name: strings.get(element[1]),
-            timeout: strings.get(element[2]),
-            args: strings.get(element[4]),
+            libname: strings.get(element[2]),
+            timeout: strings.get(element[3]),
+            args: strings.get(element[5]),
+            assign: strings.get(element[6]),
+            tags: strings.get(element[7]),
             doc: function () {
-                var doc = strings.get(element[3]);
+                var doc = strings.get(element[4]);
                 this.doc = function () { return doc; };
                 return doc;
             },
-            status: parseStatus(element[5], strings),
-            times: model.Times(times(element[5])),
-            isChildrenLoaded: typeof(element[6]) !== 'number'
+            status: parseStatus(element[8], strings),
+            times: model.Times(times(element[8])),
+            isChildrenLoaded: typeof(element[9]) !== 'number'
         });
-        lazyPopulateKeywordsFromFile(kw, element[6], strings);
-        kw.populateMessages(Populator(element[7], strings, message));
+        lazyPopulateKeywordsFromFile(kw, element[9], strings);
+        kw.populateMessages(Populator(element[10], strings, message));
         return kw;
     }
-    function lazyPopulateKeywordsFromFile(parent, keywordsOrIndex, strings) {
+    function lazyPopulateKeywordsFromFile(parent, modelOrIndex, strings) {
+        var model, index, populator;
+        var creator = childCreator(parent, createKeyword);
         if (parent.isChildrenLoaded) {
-            var keywords = keywordsOrIndex;
-            parent.populateKeywords(Populator(keywords, strings, childCreator(parent, createKeyword)));
+            model = modelOrIndex;
+            populator = Populator(model, strings, creator);
         } else {
-            var index = keywordsOrIndex;
+            index = modelOrIndex;
             parent.childFileName = window.settings['splitLogBase'] + '-' + index + '.js';
-            parent.populateKeywords(SplitLogPopulator(keywordsOrIndex, childCreator(parent, createKeyword)));
+            populator = SplitLogPopulator(index, creator);
         }
+        parent.populateKeywords(populator);
     }
     function tags(taglist, strings) {
         return util.map(taglist, strings.get);
@@ -1533,6 +1581,7 @@ function setTitle(suiteName, type) {
     document.title = util.unescape(title);
 }
 function addHeader() {
+    var generated = util.timestamp(window.output.generated);
     $.tmpl('<h1>${title}</h1>' +
            '<div id="generated">' +
              '<span>Generated<br>${generated}</span><br>' +
@@ -1541,8 +1590,8 @@ function addHeader() {
            '<div id="top-right-header">' +
              '<div id="report-or-log-link"><a href="#"></a></div>' +
            '</div>', {
-        generated: window.output.generatedTimestamp,
-        ago: util.createGeneratedAgoString(window.output.generatedMillis),
+        generated: util.createGeneratedString(generated),
+        ago: util.createGeneratedAgoString(generated),
         title: document.title
     }).appendTo($('#header'));
 }
@@ -1678,28 +1727,25 @@ function stopPropagation(event) {
 window.output = {};
 </script>
 <script type="text/javascript">
-window.output["suite"] = [1,2,3,4,[],[1,0,79027],[],[[5,0,1,0,[6],[1,168,15901],[[1,7,0,0,0,[1,169,1433],[[0,8,0,9,10,[1,169,1433],[],[[170,2,11]]]],[]],[0,12,0,0,0,[1,1603,12344],[[0,13,0,0,0,[1,1603,5806],[[0,14,0,15,16,[1,1604,5805],[],[[1604,2,17]]]],[]],[0,18,0,0,0,[1,7409,103],[[0,19,0,20,21,[1,7409,103],[],[]]],[]],[0,22,0,0,0,[1,7512,6300],[[0,23,0,0,0,[1,7512,530],[[0,24,0,25,26,[1,7512,530],[],[[7512,2,27]]]],[]],[0,28,0,0,0,[1,8042,5770],[[0,29,0,30,31,[1,8042,5769],[],[[8044,2,32]]]],[]]],[]],[0,33,0,0,0,[1,13812,135],[[0,19,0,20,34,[1,13813,134],[],[]]],[]]],[]],[2,35,0,0,0,[1,13949,2120],[[0,36,0,37,0,[1,13949,2120],[],[]]],[]]]],[38,0,1,0,[6],[1,16069,19325],[[1,7,0,0,0,[1,16069,1178],[[0,8,0,9,10,[1,16069,1177],[],[[16069,2,11]]]],[]],[0,12,0,0,0,[1,17247,10271],[[0,13,0,0,0,[1,17248,4230],[[0,14,0,15,16,[1,17248,4230],[],[[17249,2,17]]]],[]],[0,18,0,0,0,[1,21478,140],[[0,19,0,20,21,[1,21478,140],[],[]]],[]],[0,22,0,0,0,[1,21618,5806],[[0,23,0,0,0,[1,21618,471],[[0,24,0,25,26,[1,21618,471],[],[[21618,2,27]]]],[]],[0,28,0,0,0,[1,22089,5335],[[0,29,0,30,31,[1,22090,5333],[],[[22090,2,32]]]],[]]],[]],[0,33,0,0,0,[1,27424,94],[[0,19,0,20,34,[1,27425,93],[],[]]],[]]],[]],[0,39,0,0,0,[1,27519,5763],[[0,40,0,41,0,[1,27519,5654],[[0,42,0,43,44,[1,27520,5652],[],[[27520,2,45]]]],[]],[0,46,0,0,0,[1,33173,109],[[0,19,0,20,47,[1,33174,107],[],[]]],[]]],[]],[2,35,0,0,0,[1,33282,2112],[[0,36,0,37,0,[1,33283,2111],[],[]]],[]]]],[48,0,1,0,[6],[1,35394,21413],[[1,7,0,0,0,[1,35394,1192],[[0,8,0,9,10,[1,35394,1191],[],[[35394,2,11]]]],[]],[0,12,0,0,0,[1,36586,7866],[[0,13,0,0,0,[1,36587,4451],[[0,14,0,15,16,[1,36587,4451],[],[[36587,2,17]]]],[]],[0,18,0,0,0,[1,41038,105],[[0,19,0,20,21,[1,41038,105],[],[]]],[]],[0,22,0,0,0,[1,41143,3216],[[0,23,0,0,0,[1,41143,440],[[0,24,0,25,26,[1,41143,440],[],[[41143,2,27]]]],[]],[0,28,0,0,0,[1,41583,2776],[[0,29,0,30,31,[1,41584,2774],[],[[41584,2,32]]]],[]]],[]],[0,33,0,0,0,[1,44359,93],[[0,19,0,20,34,[1,44360,91],[],[]]],[]]],[]],[0,39,0,0,0,[1,44452,7849],[[0,40,0,41,0,[1,44453,7747],[[0,42,0,43,44,[1,44453,7746],[],[[44454,2,45]]]],[]],[0,46,0,0,0,[1,52200,101],[[0,19,0,20,47,[1,52201,100],[],[]]],[]]],[]],[0,49,0,0,0,[1,52302,2472],[[0,50,0,0,0,[1,52303,2367],[[0,29,0,30,51,[1,52303,2367],[],[[52303,2,52]]]],[]],[0,53,0,0,0,[1,54670,104],[[0,19,0,20,54,[1,54671,102],[],[]]],[]]],[]],[2,35,0,0,0,[1,54775,2032],[[0,36,0,37,0,[1,54775,2032],[],[]]],[]]]],[55,0,1,0,[6],[1,56807,22220],[[1,7,0,0,0,[1,56807,1167],[[0,8,0,9,10,[1,56807,1166],[],[[56807,2,11]]]],[]],[0,12,0,0,0,[1,57974,10882],[[0,13,0,0,0,[1,57975,4533],[[0,14,0,15,16,[1,57975,4533],[],[[57976,2,17]]]],[]],[0,18,0,0,0,[1,62508,97],[[0,19,0,20,21,[1,62508,97],[],[]]],[]],[0,22,0,0,0,[1,62605,5735],[[0,23,0,0,0,[1,62605,406],[[0,24,0,25,26,[1,62605,405],[],[[62605,2,27]]]],[]],[0,28,0,0,0,[1,63011,5329],[[0,29,0,30,31,[1,63012,5327],[],[[63012,2,32]]]],[]]],[]],[0,33,0,0,0,[1,68340,516],[[0,19,0,20,34,[1,68341,515],[],[]]],[]]],[]],[0,39,0,0,0,[1,68856,3537],[[0,40,0,41,0,[1,68856,3414],[[0,42,0,43,44,[1,68856,3414],[],[[68856,2,45]]]],[]],[0,46,0,0,0,[1,72270,123],[[0,19,0,20,47,[1,72271,121],[],[]]],[]]],[]],[0,49,0,0,0,[1,72393,2465],[[0,50,0,0,0,[1,72394,2331],[[0,29,0,30,51,[1,72394,2330],[],[[72395,2,52]]]],[]],[0,53,0,0,0,[1,74725,133],[[0,19,0,20,54,[1,74726,132],[],[]]],[]]],[]],[0,56,0,0,0,[1,74859,2135],[[0,57,0,0,0,[1,74859,1980],[[0,42,0,43,58,[1,74860,1978],[],[[74860,2,59]]]],[]],[0,60,0,0,0,[1,76839,155],[[0,61,0,62,63,[1,76840,52],[],[[76892,2,64]]],[0,65,0,66,67,[1,76892,101],[],[[76892,2,68]]]],[]]],[]],[2,35,0,0,0,[1,76995,2032],[[0,36,0,37,0,[1,76996,2031],[],[]]],[]]]]],[],[4,4,4,4]];
+window.output["suite"] = [1,2,3,4,[],[0,0,88773],[],[[5,0,1,0,[6],[0,122,40930,7],[[1,8,9,0,0,0,0,0,[1,122,4804],[[0,10,11,0,12,13,0,0,[1,123,4803],[],[[123,2,14]]]],[]],[0,15,1,0,0,0,0,0,[0,4927,32900],[[0,16,17,0,0,0,0,0,[1,4927,27145],[[0,18,11,0,19,20,0,0,[1,4927,27145],[],[[4928,2,21]]]],[]],[0,22,17,0,0,0,0,0,[0,32072,5754],[[0,23,11,0,24,25,0,0,[0,32073,5753],[[0,26,11,0,27,0,0,0,[1,37505,321],[],[[37825,2,28]]]],[[37826,5,7]]]],[]]],[]],[2,29,9,0,0,0,0,0,[1,37828,3223],[[0,30,11,0,31,0,0,0,[1,37828,3223],[],[]]],[]]]],[32,0,1,0,[6],[0,41054,16107,7],[[1,8,9,0,0,0,0,0,[1,41054,4669],[[0,10,11,0,12,13,0,0,[1,41055,4668],[],[[41055,2,14]]]],[]],[0,15,1,0,0,0,0,0,[0,45724,8412],[[0,16,17,0,0,0,0,0,[1,45724,2731],[[0,18,11,0,19,20,0,0,[1,45724,2731],[],[[45724,2,21]]]],[]],[0,22,17,0,0,0,0,0,[0,48455,5681],[[0,23,11,0,24,25,0,0,[0,48455,5680],[[0,26,11,0,27,0,0,0,[1,53966,169],[],[[54135,2,33]]]],[[54135,5,7]]]],[]]],[]],[2,29,9,0,0,0,0,0,[1,54137,3023],[[0,30,11,0,31,0,0,0,[1,54137,3023],[],[]]],[]]]],[34,0,1,0,[6],[0,57162,15613,7],[[1,8,9,0,0,0,0,0,[1,57163,4675],[[0,10,11,0,12,13,0,0,[1,57163,4675],[],[[57163,2,14]]]],[]],[0,15,1,0,0,0,0,0,[0,61838,7921],[[0,16,17,0,0,0,0,0,[1,61839,2485],[[0,18,11,0,19,20,0,0,[1,61839,2485],[],[[61839,2,21]]]],[]],[0,22,17,0,0,0,0,0,[0,64324,5434],[[0,23,11,0,24,25,0,0,[0,64324,5434],[[0,26,11,0,27,0,0,0,[1,69589,169],[],[[69757,2,35]]]],[[69758,5,7]]]],[]]],[]],[2,29,9,0,0,0,0,0,[1,69759,3015],[[0,30,11,0,31,0,0,0,[1,69760,3014],[],[]]],[]]]],[36,0,1,0,[6],[0,72777,15994,7],[[1,8,9,0,0,0,0,0,[1,72778,4699],[[0,10,11,0,12,13,0,0,[1,72778,4699],[],[[72778,2,14]]]],[]],[0,15,1,0,0,0,0,0,[0,77478,8165],[[0,16,17,0,0,0,0,0,[1,77478,2686],[[0,18,11,0,19,20,0,0,[1,77478,2686],[],[[77478,2,21]]]],[]],[0,22,17,0,0,0,0,0,[0,80164,5479],[[0,23,11,0,24,25,0,0,[0,80164,5479],[[0,26,11,0,27,0,0,0,[1,85462,180],[],[[85642,2,37]]]],[[85642,5,7]]]],[]]],[]],[2,29,9,0,0,0,0,0,[1,85644,3126],[[0,30,11,0,31,0,0,0,[1,85644,3126],[],[]]],[]]]]],[],[4,0,4,0]];
 </script>
 <script type="text/javascript">
 window.output["strings"] = [];
 </script>
 <script type="text/javascript">
-window.output["strings"] = window.output["strings"].concat(["*","*Amazon","*C:\\development\\robot-scripts\\amazon - procedural\\tests\\amazon.robot","*../tests/amazon.robot","*<p>This is some basic info about the whole suite\x3c/p>","*Logged out user can search for products","*Smoke","*Common.Begin Web Test","*Selenium2Library.Open Browser","*<p>Opens a new browser instance to given URL.\x3c/p>","*about:blank, ie","*Opening browser 'ie' to base url 'about:blank'","*Amazon.Search for Products","*LandingPage.Load","*Selenium2Library.Go To","*<p>Navigates the active browser instance to the provided URL.\x3c/p>","*<a href=\"http://www.amazon.com\">http://www.amazon.com\x3c/a>","*Opening url '<a href=\"http://www.amazon.com\">http://www.amazon.com\x3c/a>'","*LandingPage.Verify Page Loaded","*Selenium2Library.Wait Until Page Contains","*<p>Waits until `text` appears on current page.\x3c/p>","*Your Amazon.com","*TopNav.Search for Products","*TopNav.Enter Search Term","*Selenium2Library.Input Text","*<p>Types the given `text` into text field identified by `locator`.\x3c/p>","*id=twotabsearchtextbox, Ferrari 458","*Typing text 'Ferrari 458' into text field 'id=twotabsearchtextbox'","*TopNav.Submit Search","*Selenium2Library.Click Button","*<p>Clicks a button identified by `locator`.\x3c/p>","*xpath=//*[@id=\"nav-search\"]/form/div[2]/div/input","*Clicking button 'xpath=//*[@id=\"nav-search\"]/form/div[2]/div/input'.","*SearchResults.Verify Search Completed","*results for \"Ferrari 458\"","*Common.End Web Test","*Selenium2Library.Close Browser","*<p>Closes the current browser.\x3c/p>","*Logged out user can view a product","*Amazon.Select Product from Search Results","*SearchResults.Click Product Link","*<p>Clicks on the first product in the search results list\x3c/p>","*Selenium2Library.Click Link","*<p>Clicks a link identified by locator.\x3c/p>","*css=#result_0 a.s-access-detail-page","*Clicking link 'css=#result_0 a.s-access-detail-page'.","*Product.Verify Page Loaded","*Back to search results","*Logged out user can add product to cart","*Amazon.Add Product to Cart","*Product.Add to Cart","*id=add-to-cart-button","*Clicking button 'id=add-to-cart-button'.","*Cart.Verify Product Added","*Added to Cart","*Logged out user must sign in to check out","*Amazon.Begin Checkout","*Cart.Proceed to Checkout","*id=hlb-ptc-btn-native","*Clicking link 'id=hlb-ptc-btn-native'.","*SignIn.Verify Page Loaded","*Selenium2Library.Page Should Contain Element","*<p>Verifies element identified by `locator` is found on the current page.\x3c/p>","*ap_signin1a_pagelet_title","*Current page contains element 'ap_signin1a_pagelet_title'.","*Selenium2Library.Element Text Should Be","*<p>Verifies element identified by `locator` exactly contains text `expected`.\x3c/p>","*ap_signin1a_pagelet_title, Sign In","*Verifying element 'ap_signin1a_pagelet_title' contains exactly text 'Sign In'."]);
+window.output["strings"] = window.output["strings"].concat(["*","*Amazon","*C:\\Development\\robot-scripts\\RobotFrameworkTutorials\\more_readable_final\\tests\\amazon.robot","*../tests/amazon.robot","*<p>This is some basic info about the whole suite\x3c/p>","*Logged out user can search for products","*Smoke","*Text 'Your Amazon.com' did not appear in 5 seconds","*Begin Web Test","*Common","*Open Browser","*Selenium2Library","*<p>Opens a new browser instance to given URL.\x3c/p>","*about:blank, ie","*Opening browser 'ie' to base url 'about:blank'","*Search for Products","*Load","*LandingPage","*Go To","*<p>Navigates the active browser instance to the provided URL.\x3c/p>","*<a href=\"http://www.amazon.com\">http://www.amazon.com\x3c/a>","*Opening url '<a href=\"http://www.amazon.com\">http://www.amazon.com\x3c/a>'","*Verify Page Loaded","*Wait Until Page Contains","*<p>Waits until `text` appears on current page.\x3c/p>","*Your Amazon.com","*Capture Page Screenshot","*<p>Takes a screenshot of the current page and embeds it into the log.\x3c/p>","*\x3c/td>\x3c/tr><tr><td colspan=\"3\"><a href=\"selenium-screenshot-1.png\"><img src=\"selenium-screenshot-1.png\" width=\"800px\">\x3c/a>","*End Web Test","*Close Browser","*<p>Closes the current browser.\x3c/p>","*Logged out user can view a product","*\x3c/td>\x3c/tr><tr><td colspan=\"3\"><a href=\"selenium-screenshot-2.png\"><img src=\"selenium-screenshot-2.png\" width=\"800px\">\x3c/a>","*Logged out user can add product to cart","*\x3c/td>\x3c/tr><tr><td colspan=\"3\"><a href=\"selenium-screenshot-3.png\"><img src=\"selenium-screenshot-3.png\" width=\"800px\">\x3c/a>","*Logged out user must sign in to check out","*\x3c/td>\x3c/tr><tr><td colspan=\"3\"><a href=\"selenium-screenshot-4.png\"><img src=\"selenium-screenshot-4.png\" width=\"800px\">\x3c/a>"]);
+</script>
+<script type="text/javascript">
+window.output["stats"] = [[{"elapsed":"00:01:29","fail":4,"label":"Critical Tests","pass":0},{"elapsed":"00:01:29","fail":4,"label":"All Tests","pass":0}],[{"elapsed":"00:01:29","fail":4,"label":"Smoke","pass":0}],[{"elapsed":"00:01:29","fail":4,"id":"s1","label":"Amazon","name":"Amazon","pass":0}]];
 </script>
 <script type="text/javascript">
 window.output["errors"] = [];
 </script>
 <script type="text/javascript">
-window.output["stats"] = [[{"elapsed":"00:01:19","fail":0,"label":"Critical Tests","pass":4},{"elapsed":"00:01:19","fail":0,"label":"All Tests","pass":4}],[{"elapsed":"00:01:19","fail":0,"label":"Smoke","pass":4}],[{"elapsed":"00:01:19","fail":0,"id":"s1","label":"Amazon","name":"Amazon","pass":4}]];
+window.output["baseMillis"] = 1523286867884;
 </script>
 <script type="text/javascript">
-window.output["generatedTimestamp"] = "20150616 20:01:40 GMT -07:00";
-</script>
-<script type="text/javascript">
-window.output["generatedMillis"] = 78352;
-</script>
-<script type="text/javascript">
-window.output["baseMillis"] = 1434510021648;
+window.output["generated"] = 88788;
 </script>
 <script type="text/javascript">
 window.settings = {"defaultLevel":"INFO","minLevel":"INFO","reportURL":"report.html","splitLogBase":"log","title":""};
@@ -1867,7 +1913,7 @@ function addTestExecutionLog(main) {
       ${date} ${time}
       {{/if}}
     </td>
-    <td class="${level.toLowerCase()} level">${level}</td>
+    <td class="${level.toLowerCase()} level"><span class="label ${level.toLowerCase()}">${level}</span></td>
     <td class="message">{{html text}}</td>
     <td class="select-message" onclick="javascript:selectMessage('${id}')" title="Select message text">
       <div></div>
@@ -1880,7 +1926,7 @@ function addTestExecutionLog(main) {
     <div class="element-header closed" onclick="toggleSuite('${id}')">
       <div class="element-header-left" title="{{html fullName}}">
         <span class="elapsed" title="Elapsed time">${times.elapsedTime}</span>
-        <span class="${status.toLowerCase()}">TEST SUITE: </span>
+        <span class="label ${status.toLowerCase()}">SUITE</span>
         <span class="name">{{html name}}</span>
       </div>
       <div class="element-header-right" onclick="stopPropagation(event)" title="">
@@ -1942,7 +1988,7 @@ function addTestExecutionLog(main) {
     <div class="element-header closed" onclick="toggleTest('${id}')">
       <div class="element-header-left" title="{{html fullName}}">
         <span class="elapsed" title="Elapsed time">${times.elapsedTime}</span>
-        <span class="${status.toLowerCase()}">TEST CASE: </span>
+        <span class="label ${status.toLowerCase()}">TEST</span>
         <span class="name">{{html name}}</span>
         {{if !isCritical}}(non-critical){{/if}}
       </div>
@@ -1983,7 +2029,7 @@ function addTestExecutionLog(main) {
         </tr>
         <tr>
           <th>Status:</th>
-          <td><span class="${status.toLowerCase()}">${status}</span> ({{if isCritical}}critical{{else}}non-critical{{/if}})</td>
+          <td><span class="label ${status.toLowerCase()}">${status}</span> ({{if isCritical}}critical{{else}}non-critical{{/if}})</td>
         </tr>
         {{if message()}}
         <tr>
@@ -2001,8 +2047,9 @@ function addTestExecutionLog(main) {
     <div class="element-header closed" onclick="toggleKeyword('${id}')">
       <div class="element-header-left" title="{{html name}}">
         <span class="elapsed" title="Elapsed time">${times.elapsedTime}</span>
-        <span class="${status.toLowerCase()}">${type}: </span>
-        <span class="name">{{html name}}</span>
+        <span class="label keyword ${status.toLowerCase()}">${type}</span>
+        <span>{{html assign}}</span>
+        <span class="name"><span class="parent-name">{{html libname}}{{if libname}} . {{/if}}</span>{{html name}}</span>
         <span class="arg">{{html arguments}}</span>
       </div>
       <div class="element-header-right" onclick="stopPropagation(event)">
@@ -2018,6 +2065,12 @@ function addTestExecutionLog(main) {
         <tr>
           <th>Documentation:</th>
           <td class="doc">{{html doc()}}</td>
+        </tr>
+        {{/if}}
+        {{if tags}}
+        <tr>
+          <th>Tags:</th>
+          <td>{{html tags}}</td>
         </tr>
         {{/if}}
         {{if timeout}}
@@ -2039,7 +2092,7 @@ function addTestExecutionLog(main) {
   <table id="${id}" class="messages ${level.toLowerCase()}-message">
     <tr class="message-row">
       <td class="time">${time}</td>
-      <td class="${level.toLowerCase()} level">${level}</td>
+      <td class="${level.toLowerCase()} level"><span class="label ${level.toLowerCase()}">${level}</span></td>
       <td class="message">{{html text}}</td>
       <td class="select-message" onclick="javascript:selectMessage('${id}')" title="Select message text">
         <div></div>
