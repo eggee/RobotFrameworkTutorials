@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20161012 22:32:17.235" generator="Robot 3.0 (Python 2.7.12 on win32)">
+<suite source="C:\development\robot-scripts\amazon\tests\Amazon.robot" id="s1" name="Amazon">
+<test id="s1-t1" name="Should be able to login">
+<kw type="setup" name="Begin Web Test" library="Common">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>about:blank</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20161012 22:32:17.437" level="INFO">Opening browser 'ie' to base url 'about:blank'</msg>
+<status status="PASS" endtime="20161012 22:32:18.718" starttime="20161012 22:32:17.437"></status>
+</kw>
+<status status="PASS" endtime="20161012 22:32:18.718" starttime="20161012 22:32:17.436"></status>
+</kw>
+<kw name="Login" library="AmazonApp">
+<arguments>
+<arg>${LOGIN_EMAIL}</arg>
+<arg>${LOGIN_PASSWORD}</arg>
+</arguments>
+<kw name="Login With Valid Credentials" library="SignIn">
+<arguments>
+<arg>${Username}</arg>
+<arg>${Password}</arg>
+</arguments>
+<kw name="Fill &quot;Email&quot; Field" library="SignIn">
+<arguments>
+<arg>${Username}</arg>
+</arguments>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>Filling Email field with ${Username}</arg>
+</arguments>
+<msg timestamp="20161012 22:32:18.723" level="INFO">Filling Email field with admin@robotrameworktutorial.com</msg>
+<status status="PASS" endtime="20161012 22:32:18.723" starttime="20161012 22:32:18.722"></status>
+</kw>
+<status status="PASS" endtime="20161012 22:32:18.723" starttime="20161012 22:32:18.721"></status>
+</kw>
+<kw name="Fill &quot;Password&quot; Field" library="SignIn">
+<arguments>
+<arg>${Password}</arg>
+</arguments>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>Filling Password field with ${Password}</arg>
+</arguments>
+<msg timestamp="20161012 22:32:18.725" level="INFO">Filling Password field with myPassword1</msg>
+<status status="PASS" endtime="20161012 22:32:18.725" starttime="20161012 22:32:18.724"></status>
+</kw>
+<status status="PASS" endtime="20161012 22:32:18.725" starttime="20161012 22:32:18.723"></status>
+</kw>
+<kw name="Click &quot;Sign In&quot; Button" library="SignIn">
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>Clicking submit button</arg>
+</arguments>
+<msg timestamp="20161012 22:32:18.726" level="INFO">Clicking submit button</msg>
+<status status="PASS" endtime="20161012 22:32:18.726" starttime="20161012 22:32:18.726"></status>
+</kw>
+<status status="PASS" endtime="20161012 22:32:18.727" starttime="20161012 22:32:18.725"></status>
+</kw>
+<status status="PASS" endtime="20161012 22:32:18.727" starttime="20161012 22:32:18.720"></status>
+</kw>
+<status status="PASS" endtime="20161012 22:32:18.727" starttime="20161012 22:32:18.719"></status>
+</kw>
+<kw type="teardown" name="End Web Test" library="Common">
+<kw name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20161012 22:32:22.748" starttime="20161012 22:32:18.729"></status>
+</kw>
+<status status="PASS" endtime="20161012 22:32:22.748" starttime="20161012 22:32:18.728"></status>
+</kw>
+<tags>
+<tag>Login</tag>
+</tags>
+<status status="PASS" endtime="20161012 22:32:22.749" critical="yes" starttime="20161012 22:32:17.435"></status>
+</test>
+<doc>This is some basic info about the whole suite</doc>
+<status status="PASS" endtime="20161012 22:32:22.751" starttime="20161012 22:32:17.239"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="0" pass="1">Critical Tests</stat>
+<stat fail="0" pass="1">All Tests</stat>
+</total>
+<tag>
+<stat fail="0" pass="1">Login</stat>
+</tag>
+<suite>
+<stat fail="0" id="s1" name="Amazon" pass="1">Amazon</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
